@@ -59,4 +59,20 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(List.of("another link`", "cod[e", "code]"), links) ;
     }
+
+    @Test
+    public void testSnippet2() throws IOException {
+        Path fileName = Path.of("snippet2");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(List.of("nested link", "a nested parenthesized url", "some escaped [ brackets ]"), links);
+    }
+
+    @Test
+    public void testSnippet3() throws IOException {
+        Path fileName = Path.of("snippet3");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(List.of("https://www.twitter.com", "this title text is really long and takes up more than one line", "https://cse.ucsd.edu/"), links);
+    }
 }
